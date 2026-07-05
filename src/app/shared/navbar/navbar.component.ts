@@ -43,6 +43,10 @@ export class NavbarComponent {
     this.menuOpen.set(false);
   }
 
+  onPhotoError(event: Event): void {
+    (event.target as HTMLImageElement).style.display = 'none';
+  }
+
   goToSection(fragment: string): void {
     this.closeMenu();
     this.router

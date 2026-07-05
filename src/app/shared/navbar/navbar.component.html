@@ -1,7 +1,10 @@
 <header class="navbar" [class.scrolled]="scrolled()">
   <div class="container inner">
     <a class="brand" routerLink="/" (click)="closeMenu()">
-      <span class="brand-mark">MM</span>
+      <span class="brand-mark">
+        <img src="assets/profile.jpg" alt="Mina Magdy" (error)="onPhotoError($event)" />
+        <span class="brand-initials">MM</span>
+      </span>
       <span class="brand-name">Mina Magdy</span>
     </a>
 
@@ -11,9 +14,9 @@
           {{ link.label }}
         </button>
       }
-      <a class="btn btn-primary cta" href="#contact" (click)="closeMenu()">
+      <button type="button" class="btn btn-primary cta" (click)="goToSection('contact')">
         <i class="bi bi-send"></i> Hire Me
-      </a>
+      </button>
     </nav>
 
     <div class="actions">

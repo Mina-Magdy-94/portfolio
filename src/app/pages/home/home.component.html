@@ -22,12 +22,12 @@
         <strong>Oasis Computer Systems</strong>.
       </p>
       <div class="hero-actions">
-        <a href="#projects" class="btn btn-primary">
+        <button type="button" class="btn btn-primary" (click)="scrollToSection('projects')">
           <i class="bi bi-collection-play-fill"></i> View Projects
-        </a>
-        <a href="#contact" class="btn btn-outline">
+        </button>
+        <button type="button" class="btn btn-outline" (click)="scrollToSection('contact')">
           <i class="bi bi-chat-heart"></i> Get in Touch
-        </a>
+        </button>
       </div>
       <div class="hero-meta">
         <a [href]="'mailto:' + profile.email"><i class="bi bi-envelope-at"></i> {{ profile.email }}</a>
@@ -40,6 +40,7 @@
       <div class="avatar-wrap">
         <div class="avatar-ring"></div>
         <div class="avatar">
+          <img src="assets/profile.jpg" alt="Mina Magdy" (error)="onPhotoError($event)" />
           <span class="avatar-initials">MM</span>
         </div>
         <div class="floating floating-1"><i class="bi bi-code-slash"></i></div>
@@ -185,7 +186,36 @@
       @for (group of skills; track group.name) {
         <div class="skill-card card" appReveal>
           <div class="skill-head">
-            <span class="skill-icon"><i class="bi" [class]="group.icon"></i></span>
+            <span class="skill-icon" [class.brand]="group.name === 'Angular' || group.name === 'React' || group.name === 'Vue'">
+              @switch (group.name) {
+                @case ('Angular') {
+                  <svg viewBox="0 0 256 272" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+                    <path fill="#DD0031" d="M0 45.7L127.9 0l128 45.7-19.6 156.2L127.9 272 19.4 201.9z"/>
+                    <path fill="#C3002F" d="M255.9 45.7L127.9 0v272l108.4-70.1z"/>
+                    <path fill="#FFF" d="M127.9 30.4L49.4 208.2h29.3l15.8-39.4h67L177.2 208.2h29.3L127.9 30.4zm22.9 114h-45.8l22.9-55.1 22.9 55.1z"/>
+                  </svg>
+                }
+                @case ('React') {
+                  <svg viewBox="-11.5 -10.23 23 20.46" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+                    <circle r="2.05" fill="#61DAFB"/>
+                    <g stroke="#61DAFB" stroke-width="1" fill="none">
+                      <ellipse rx="11" ry="4.2"/>
+                      <ellipse rx="11" ry="4.2" transform="rotate(60)"/>
+                      <ellipse rx="11" ry="4.2" transform="rotate(120)"/>
+                    </g>
+                  </svg>
+                }
+                @case ('Vue') {
+                  <svg viewBox="0 0 261.76 226.69" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+                    <path d="M161.096 0l-30.224 52.35L100.647 0H0l130.872 226.69L261.76 0z" fill="#41B883"/>
+                    <path d="M161.096 0l-30.224 52.35L100.647 0H52.36l78.512 135.985L209.408 0z" fill="#34495E"/>
+                  </svg>
+                }
+                @default {
+                  <i class="bi" [class]="group.icon"></i>
+                }
+              }
+            </span>
             <h3>{{ group.name }}</h3>
           </div>
           <div class="skill-items">

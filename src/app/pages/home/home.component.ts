@@ -39,6 +39,16 @@ export class HomeComponent implements AfterViewInit {
     }
   }
 
+  onPhotoError(event: Event): void {
+    (event.target as HTMLImageElement).style.display = 'none';
+  }
+
+  scrollToSection(id: string): void {
+    if (!isPlatformBrowser(this.platformId)) return;
+    const el = document.getElementById(id);
+    el?.scrollIntoView({ behavior: 'smooth', block: 'start' });
+  }
+
   private rotateTagline(): void {
     const el = this.taglineRef?.nativeElement;
     if (!el) return;
