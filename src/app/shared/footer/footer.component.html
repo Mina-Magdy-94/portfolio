@@ -1,0 +1,27 @@
+<footer class="footer">
+  <div class="container inner">
+    <div class="left">
+      <span class="brand-mark">MM</span>
+      <div>
+        <div class="name">{{ profile.name }}</div>
+        <div class="role">{{ profile.title }}</div>
+      </div>
+    </div>
+
+    <div class="socials">
+      <a [href]="'mailto:' + profile.email" aria-label="Email">
+        <i class="bi bi-envelope-fill"></i>
+      </a>
+      <a [href]="profile.linkedin" target="_blank" rel="noopener" aria-label="LinkedIn">
+        <i class="bi bi-linkedin"></i>
+      </a>
+      <a [href]="profile.github" target="_blank" rel="noopener" aria-label="GitHub">
+        <i class="bi bi-github"></i>
+      </a>
+    </div>
+
+    <div class="copy">
+      © {{ year }} {{ profile.name }}. Built with Angular.
+    </div>
+  </div>
+</footer>

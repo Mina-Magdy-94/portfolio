@@ -1,0 +1,38 @@
+<header class="navbar" [class.scrolled]="scrolled()">
+  <div class="container inner">
+    <a class="brand" routerLink="/" (click)="closeMenu()">
+      <span class="brand-mark">MM</span>
+      <span class="brand-name">Mina Magdy</span>
+    </a>
+
+    <nav class="links" [class.open]="menuOpen()">
+      @for (link of links; track link.fragment) {
+        <button type="button" class="link" (click)="goToSection(link.fragment)">
+          {{ link.label }}
+        </button>
+      }
+      <a class="btn btn-primary cta" href="#contact" (click)="closeMenu()">
+        <i class="bi bi-send"></i> Hire Me
+      </a>
+    </nav>
+
+    <div class="actions">
+      <button
+        type="button"
+        class="icon-btn"
+        (click)="theme.toggle()"
+        [attr.aria-label]="theme.theme() === 'dark' ? 'Switch to light theme' : 'Switch to dark theme'"
+      >
+        <i class="bi" [class.bi-sun-fill]="theme.theme() === 'dark'" [class.bi-moon-stars-fill]="theme.theme() === 'light'"></i>
+      </button>
+      <button
+        type="button"
+        class="icon-btn burger"
+        (click)="toggleMenu()"
+        aria-label="Toggle menu"
+      >
+        <i class="bi" [class.bi-list]="!menuOpen()" [class.bi-x-lg]="menuOpen()"></i>
+      </button>
+    </div>
+  </div>
+</header>

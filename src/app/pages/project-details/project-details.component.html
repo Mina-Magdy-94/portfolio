@@ -1,0 +1,155 @@
+@if (project(); as p) {
+  <article class="details">
+    <!-- HERO -->
+    <header class="details-hero" [style.background]="p.accent">
+      <div class="details-hero-pattern"></div>
+      <div class="container details-hero-inner">
+        <button type="button" class="back-btn" (click)="goBack()">
+          <i class="bi bi-arrow-left"></i> Back
+        </button>
+
+        <div class="hero-content">
+          <div class="hero-badges">
+            <span class="badge-cat">{{ p.category }}</span>
+            <span class="badge-period">{{ p.period }}</span>
+          </div>
+          <h1 class="hero-title">{{ p.title }}</h1>
+          <p class="hero-tagline">{{ p.tagline }}</p>
+          <div class="hero-meta">
+            <span><i class="bi bi-building"></i> {{ p.company }}</span>
+          </div>
+        </div>
+
+        <div class="hero-icon">
+          <i class="bi" [class]="p.icon"></i>
+        </div>
+      </div>
+    </header>
+
+    <!-- BODY -->
+    <section class="section details-body">
+      <div class="container body-grid">
+        <!-- LEFT: description + role + highlights -->
+        <div class="body-main">
+          <div class="body-block card" appReveal>
+            <h2 class="block-title">
+              <i class="bi bi-info-circle-fill"></i> About this project
+            </h2>
+            <p class="block-copy">{{ p.description }}</p>
+          </div>
+
+          <div class="body-block card" appReveal>
+            <h2 class="block-title">
+              <i class="bi bi-person-workspace"></i> My role
+            </h2>
+            <p class="block-copy">{{ p.role }}</p>
+          </div>
+
+          <div class="body-block card" appReveal>
+            <h2 class="block-title">
+              <i class="bi bi-stars"></i> Key contributions
+            </h2>
+            <ul class="highlights">
+              @for (h of p.highlights; track $index) {
+                <li>
+                  <span class="check"><i class="bi bi-check2"></i></span>
+                  <span>{{ h }}</span>
+                </li>
+              }
+            </ul>
+          </div>
+        </div>
+
+        <!-- RIGHT: stack + links -->
+        <aside class="body-aside">
+          <div class="aside-block card" appReveal>
+            <h3 class="aside-title"><i class="bi bi-cpu"></i> Tech Stack</h3>
+            <div class="stack-tags">
+              @for (tech of p.stack; track tech) {
+                <span class="chip">{{ tech }}</span>
+              }
+            </div>
+          </div>
+
+          <div class="aside-block card" appReveal>
+            <h3 class="aside-title"><i class="bi bi-link-45deg"></i> Links</h3>
+            @if (p.liveUrl) {
+              <a class="link-tile" [href]="p.liveUrl" target="_blank" rel="noopener">
+                <i class="bi bi-box-arrow-up-right"></i>
+                <div>
+                  <div class="link-label">Live application</div>
+                  <div class="link-hint">Open in new tab</div>
+                </div>
+              </a>
+            } @else {
+              <div class="link-tile placeholder">
+                <i class="bi bi-lock-fill"></i>
+                <div>
+                  <div class="link-label">Private / Internal</div>
+                  <div class="link-hint">Live URL will be added when available</div>
+                </div>
+              </div>
+            }
+            @if (p.repoUrl) {
+              <a class="link-tile" [href]="p.repoUrl" target="_blank" rel="noopener">
+                <i class="bi bi-github"></i>
+                <div>
+                  <div class="link-label">Source code</div>
+                  <div class="link-hint">GitHub repository</div>
+                </div>
+              </a>
+            }
+          </div>
+
+          <div class="aside-block card cta-block" appReveal>
+            <h3 class="aside-title"><i class="bi bi-envelope-heart"></i> Interested?</h3>
+            <p>I'd love to talk about what I built here or how it applies to your team.</p>
+            <a class="btn btn-primary" href="mailto:minamagdysh2017@gmail.com">
+              <i class="bi bi-send"></i> Get in Touch
+            </a>
+          </div>
+        </aside>
+      </div>
+    </section>
+
+    <!-- RELATED -->
+    @if (related().length) {
+      <section class="section section-alt related">
+        <div class="container">
+          <div class="section-title" appReveal>
+            <span class="eyebrow">More work</span>
+            <h2>Other projects</h2>
+          </div>
+          <div class="related-grid">
+            @for (r of related(); track r.slug) {
+              <a class="related-card" [routerLink]="['/projects', r.slug]" appReveal>
+                <div class="related-icon" [style.background]="r.accent">
+                  <i class="bi" [class]="r.icon"></i>
+                </div>
+                <div class="related-body">
+                  <div class="related-cat">{{ r.category }}</div>
+                  <h3>{{ r.title }}</h3>
+                  <p>{{ r.tagline }}</p>
+                  <span class="related-cta">View <i class="bi bi-arrow-right"></i></span>
+                </div>
+              </a>
+            }
+          </div>
+        </div>
+      </section>
+    }
+  </article>
+} @else {
+  <section class="section">
+    <div class="container not-found">
+      <div class="card nf-card">
+        <i class="bi bi-emoji-frown"></i>
+        <h2>Project not found</h2>
+        <p>We couldn't find the project you were looking for.</p>
+        <a routerLink="/" class="btn btn-primary">
+          <i class="bi bi-house-door-fill"></i> Back to Home
+        </a>
+      </div>
+    </div>
+  </section>
+}

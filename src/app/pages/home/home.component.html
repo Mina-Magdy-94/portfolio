@@ -1,0 +1,288 @@
+<!-- HERO -->
+<section class="hero" id="top">
+  <div class="hero-bg" aria-hidden="true">
+    <div class="blob blob-1"></div>
+    <div class="blob blob-2"></div>
+    <div class="grid-pattern"></div>
+  </div>
+
+  <div class="container hero-inner">
+    <div class="hero-copy">
+      <span class="hero-badge">
+        <span class="dot"></span> Available for opportunities
+      </span>
+      <h1>
+        Hi, I'm <span class="gradient-text">Mina Magdy</span> —
+        <br />
+        <span #tagline class="rotating">Frontend Developer</span>
+      </h1>
+      <p class="hero-lead">
+        I craft responsive, performant web experiences with Angular, React and Vue.
+        Currently building enterprise insurance and leasing platforms at
+        <strong>Oasis Computer Systems</strong>.
+      </p>
+      <div class="hero-actions">
+        <a href="#projects" class="btn btn-primary">
+          <i class="bi bi-collection-play-fill"></i> View Projects
+        </a>
+        <a href="#contact" class="btn btn-outline">
+          <i class="bi bi-chat-heart"></i> Get in Touch
+        </a>
+      </div>
+      <div class="hero-meta">
+        <a [href]="'mailto:' + profile.email"><i class="bi bi-envelope-at"></i> {{ profile.email }}</a>
+        <a [href]="'tel:' + profile.phone"><i class="bi bi-telephone"></i> {{ profile.phone }}</a>
+        <span><i class="bi bi-geo-alt"></i> {{ profile.location }}</span>
+      </div>
+    </div>
+
+    <div class="hero-visual" appReveal>
+      <div class="avatar-wrap">
+        <div class="avatar-ring"></div>
+        <div class="avatar">
+          <span class="avatar-initials">MM</span>
+        </div>
+        <div class="floating floating-1"><i class="bi bi-code-slash"></i></div>
+        <div class="floating floating-2"><i class="bi bi-palette"></i></div>
+        <div class="floating floating-3"><i class="bi bi-hexagon-fill"></i></div>
+        <div class="floating floating-4"><i class="bi bi-lightning-charge-fill"></i></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ABOUT -->
+<section class="section" id="about">
+  <div class="container">
+    <div class="section-title" appReveal>
+      <span class="eyebrow">About Me</span>
+      <h2>A quick introduction</h2>
+      <p>Frontend developer with a strong focus on responsive UI, scalable architecture and clean code.</p>
+    </div>
+
+    <div class="about-grid">
+      <div class="about-copy" appReveal>
+        @for (line of profile.summary; track $index) {
+          <p>{{ line }}</p>
+        }
+      </div>
+      <div class="about-stats" appReveal>
+        <div class="stat-card">
+          <div class="stat-value">2+</div>
+          <div class="stat-label">Years Professional Experience</div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-value">{{ projects.length }}</div>
+          <div class="stat-label">Featured Projects</div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-value">3</div>
+          <div class="stat-label">Frameworks Mastered</div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-value">2</div>
+          <div class="stat-label">Languages (EN / AR)</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- EXPERIENCE -->
+<section class="section section-alt" id="experience">
+  <div class="container">
+    <div class="section-title" appReveal>
+      <span class="eyebrow">Experience</span>
+      <h2>Where I've worked</h2>
+      <p>Roles spanning enterprise insurance, healthcare, and freelance product delivery.</p>
+    </div>
+
+    <ol class="timeline">
+      @for (item of experience; track item.company + item.period) {
+        <li class="timeline-item" appReveal>
+          <div class="timeline-marker">
+            <i class="bi bi-briefcase-fill"></i>
+          </div>
+          <div class="timeline-content card">
+            <div class="timeline-head">
+              <div>
+                <h3>{{ item.role }}</h3>
+                <div class="company">{{ item.company }}</div>
+              </div>
+              <span class="chip"><i class="bi bi-calendar3"></i> {{ item.period }}</span>
+            </div>
+            <ul class="bullet-list">
+              @for (h of item.highlights; track $index) {
+                <li>{{ h }}</li>
+              }
+            </ul>
+          </div>
+        </li>
+      }
+    </ol>
+  </div>
+</section>
+
+<!-- PROJECTS -->
+<section class="section" id="projects">
+  <div class="container">
+    <div class="section-title" appReveal>
+      <span class="eyebrow">Selected Work</span>
+      <h2>Featured projects</h2>
+      <p>A curated selection of platforms I've contributed to. Click any card to see the full case study.</p>
+    </div>
+
+    <div class="projects-grid">
+      @for (project of projects; track project.slug) {
+        <a
+          class="project-card"
+          [routerLink]="['/projects', project.slug]"
+          appReveal
+        >
+          <div class="project-hero" [style.background]="project.accent">
+            <div class="project-hero-pattern"></div>
+            <div class="project-icon">
+              <i class="bi" [class]="project.icon"></i>
+            </div>
+            <span class="project-category">{{ project.category }}</span>
+          </div>
+          <div class="project-body">
+            <div class="project-meta">
+              <span class="company">{{ project.company }}</span>
+              <span class="dot-sep">•</span>
+              <span>{{ project.period }}</span>
+            </div>
+            <h3 class="project-title">{{ project.title }}</h3>
+            <p class="project-tagline">{{ project.tagline }}</p>
+            <div class="project-stack">
+              @for (tech of project.stack.slice(0, 4); track tech) {
+                <span class="chip">{{ tech }}</span>
+              }
+              @if (project.stack.length > 4) {
+                <span class="chip">+{{ project.stack.length - 4 }}</span>
+              }
+            </div>
+            <div class="project-cta">
+              View case study <i class="bi bi-arrow-right"></i>
+            </div>
+          </div>
+        </a>
+      }
+    </div>
+  </div>
+</section>
+
+<!-- SKILLS -->
+<section class="section section-alt" id="skills">
+  <div class="container">
+    <div class="section-title" appReveal>
+      <span class="eyebrow">Toolbox</span>
+      <h2>Skills & Technologies</h2>
+      <p>The stack I reach for when shipping product.</p>
+    </div>
+
+    <div class="skills-grid">
+      @for (group of skills; track group.name) {
+        <div class="skill-card card" appReveal>
+          <div class="skill-head">
+            <span class="skill-icon"><i class="bi" [class]="group.icon"></i></span>
+            <h3>{{ group.name }}</h3>
+          </div>
+          <div class="skill-items">
+            @for (item of group.items; track item) {
+              <span class="chip">{{ item }}</span>
+            }
+          </div>
+        </div>
+      }
+    </div>
+  </div>
+</section>
+
+<!-- EDUCATION & COURSES -->
+<section class="section" id="education">
+  <div class="container">
+    <div class="section-title" appReveal>
+      <span class="eyebrow">Learning</span>
+      <h2>Education & Courses</h2>
+      <p>Formal education and continuing professional development.</p>
+    </div>
+
+    <div class="edu-grid">
+      <div class="edu-column" appReveal>
+        <h3 class="edu-heading"><i class="bi bi-mortarboard-fill"></i> Education</h3>
+        @for (item of education; track item.institution) {
+          <div class="card edu-card">
+            <h4>{{ item.degree }}</h4>
+            <div class="edu-meta">{{ item.institution }} • {{ item.year }}</div>
+          </div>
+        }
+      </div>
+      <div class="edu-column" appReveal>
+        <h3 class="edu-heading"><i class="bi bi-journal-check"></i> Courses & Diplomas</h3>
+        <div class="courses-list">
+          @for (course of courses; track course.title) {
+            <div class="card course-card">
+              <div class="course-title">{{ course.title }}</div>
+              <div class="course-provider">{{ course.provider }}</div>
+            </div>
+          }
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- CONTACT -->
+<section class="section section-alt" id="contact">
+  <div class="container">
+    <div class="contact-card card" appReveal>
+      <div class="contact-copy">
+        <span class="eyebrow">Let's talk</span>
+        <h2>Have a project in mind?</h2>
+        <p>
+          I'm open to frontend roles, contract work, and interesting collaborations.
+          Reach out — I usually reply within a day.
+        </p>
+        <div class="contact-actions">
+          <a class="btn btn-primary" [href]="'mailto:' + profile.email">
+            <i class="bi bi-envelope-heart-fill"></i> Send an Email
+          </a>
+          <a class="btn btn-outline" [href]="profile.linkedin" target="_blank" rel="noopener">
+            <i class="bi bi-linkedin"></i> LinkedIn
+          </a>
+        </div>
+      </div>
+      <div class="contact-info">
+        <a [href]="'mailto:' + profile.email" class="contact-tile">
+          <i class="bi bi-envelope-fill"></i>
+          <div>
+            <div class="label">Email</div>
+            <div class="value">{{ profile.email }}</div>
+          </div>
+        </a>
+        <a [href]="'tel:' + profile.phone" class="contact-tile">
+          <i class="bi bi-telephone-fill"></i>
+          <div>
+            <div class="label">Phone</div>
+            <div class="value">{{ profile.phone }}</div>
+          </div>
+        </a>
+        <a [href]="profile.github" target="_blank" rel="noopener" class="contact-tile">
+          <i class="bi bi-github"></i>
+          <div>
+            <div class="label">GitHub</div>
+            <div class="value">&#64;Mina-Magdy-94</div>
+          </div>
+        </a>
+        <div class="contact-tile static">
+          <i class="bi bi-geo-alt-fill"></i>
+          <div>
+            <div class="label">Location</div>
+            <div class="value">{{ profile.location }}</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
